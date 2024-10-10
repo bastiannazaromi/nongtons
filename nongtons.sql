@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Sep 25, 2024 at 09:44 AM
--- Server version: 8.0.30
+-- Host: localhost
+-- Generation Time: Oct 03, 2024 at 10:15 AM
+-- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cinema` (
-  `id` int NOT NULL,
-  `namaCinema` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `namaCinema` varchar(30) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,13 +49,21 @@ INSERT INTO `cinema` (`id`, `namaCinema`, `createdAt`, `updatedAt`) VALUES
 --
 
 CREATE TABLE `film` (
-  `id` int NOT NULL,
-  `judul` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `genre` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `durasi` int NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `judul` varchar(50) NOT NULL,
+  `genre` varchar(25) NOT NULL,
+  `durasi` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `film`
+--
+
+INSERT INTO `film` (`id`, `judul`, `genre`, `durasi`, `createdAt`, `updatedAt`) VALUES
+(1, 'Kungfu Panda', 'Action', 120, '2024-10-03 08:00:23', NULL),
+(2, 'The Simpsone', 'Comedy', 140, '2024-10-03 08:00:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -64,16 +72,25 @@ CREATE TABLE `film` (
 --
 
 CREATE TABLE `jadwal_tayang` (
-  `id` int NOT NULL,
-  `idCinema` int NOT NULL,
-  `idFilm` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `idCinema` int(11) NOT NULL,
+  `idFilm` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `jamTayang` time NOT NULL,
-  `jumlahKursi` int NOT NULL,
-  `kursiTerjual` int NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `jumlahKursi` int(11) NOT NULL,
+  `kursiTerjual` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jadwal_tayang`
+--
+
+INSERT INTO `jadwal_tayang` (`id`, `idCinema`, `idFilm`, `tanggal`, `jamTayang`, `jumlahKursi`, `kursiTerjual`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 1, '2024-10-03', '15:30:00', 100, 0, '2024-10-03 08:01:02', '2024-10-03 08:04:05'),
+(2, 3, 2, '2024-10-03', '15:30:00', 100, 0, '2024-10-03 08:03:10', '2024-10-03 08:03:46'),
+(3, 3, 1, '2024-10-03', '19:00:00', 100, 0, '2024-10-03 08:03:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -82,22 +99,22 @@ CREATE TABLE `jadwal_tayang` (
 --
 
 CREATE TABLE `keys` (
-  `id` int NOT NULL,
-  `user_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `key` varchar(40) NOT NULL,
-  `level` int NOT NULL,
-  `ignore_limits` tinyint(1) NOT NULL DEFAULT '0',
-  `is_private_key` tinyint(1) NOT NULL DEFAULT '0',
-  `ip_addresses` text,
-  `date_created` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `level` int(2) NOT NULL,
+  `ignore_limits` tinyint(1) NOT NULL DEFAULT 0,
+  `is_private_key` tinyint(1) NOT NULL DEFAULT 0,
+  `ip_addresses` text DEFAULT NULL,
+  `date_created` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `keys`
 --
 
 INSERT INTO `keys` (`id`, `user_id`, `key`, `level`, `ignore_limits`, `is_private_key`, `ip_addresses`, `date_created`) VALUES
-(1, 1, 'nongtons-12345678', 1, 0, 0, NULL, 12345678);
+(1, 1, 'nongtons-12345678', 1, 0, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -106,13 +123,13 @@ INSERT INTO `keys` (`id`, `user_id`, `key`, `level`, `ignore_limits`, `is_privat
 --
 
 CREATE TABLE `orders` (
-  `id` int NOT NULL,
-  `idUser` int NOT NULL,
-  `idJadwal` int NOT NULL,
-  `jumlah` int NOT NULL,
-  `no_kursi` int NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `idJadwal` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `no_kursi` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -122,15 +139,15 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
-  `nama` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `tahun` int NOT NULL,
-  `no_hp` varchar(14) COLLATE utf8mb4_general_ci NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `no_hp` varchar(14) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -188,37 +205,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cinema`
 --
 ALTER TABLE `cinema`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `film`
 --
 ALTER TABLE `film`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `jadwal_tayang`
 --
 ALTER TABLE `jadwal_tayang`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `keys`
 --
 ALTER TABLE `keys`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
