@@ -22,7 +22,11 @@ class M_Jadwal extends CI_Model
 
 	public function getOneJadwal($id)
 	{
-		$this->db->where('id', $id);
+		$this->db->select('jadwal_tayang.*, cinema.namaCinema, film.judul, film.genre, film.durasi');
+		$this->db->join('cinema', 'cinema.id = jadwal_tayang.idCinema', 'inner');
+		$this->db->join('film', 'film.id = jadwal_tayang.idFilm', 'inner');
+
+		$this->db->where('jadwal_tayang.id', $id);
 
 		return $this->db->get('jadwal_tayang')->row();
 	}

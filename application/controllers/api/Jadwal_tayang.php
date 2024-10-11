@@ -18,11 +18,50 @@ class Jadwal_tayang extends RestController
 	{
 		$jadwal = $this->jadwal->getAllJadwal();
 
+		$newJadwal = [];
+
+		foreach ($jadwal as $jdw) {
+			array_push($newJadwal, [
+				'id' => (int) $jdw->id,
+				'idCinema' => (int) $jdw->idCinema,
+				'idFilm' => (int) $jdw->idFilm,
+				'tanggal' => $jdw->tanggal,
+				'jamTayang' => $jdw->jamTayang,
+				'jumlahKursi' => (int) $jdw->jumlahKursi,
+				'kursiTerjual' => (int) $jdw->kursiTerjual,
+				'namaCinema' => $jdw->namaCinema,
+				'judul' => $jdw->judul,
+				'genre' => $jdw->genre,
+				'durasi' => (int) $jdw->durasi
+			]);
+		}
+
 		$this->response([
 			'status'  => true,
-			'message' => 'Jadwal tayang ditemukan',
-			'data'    => $jadwal
+			'message' => (count($jadwal) > 0) ?  'Jadwal tayang ditemukan' : 'Jadwal tayang tidak ditemukan',
+			'data'    => $newJadwal
 		], 200);
+	}
+
+	public function detail_get()
+	{
+		$id = $this->get('id');
+
+		$jadwal = $this->jadwal->getOneJadwal($id);
+
+		if ($jadwal) {
+			$this->response([
+				'status'  => true,
+				'message' => 'Jadwal tayang ditemukan',
+				'data'    => $jadwal
+			], 200);
+		} else {
+			$this->response([
+				'status'  => false,
+				'message' => 'Jadwal tayang tidak ditemukan',
+				'data'    => []
+			], 400);
+		}
 	}
 }
 
