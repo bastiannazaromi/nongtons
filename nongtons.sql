@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 03, 2024 at 10:15 AM
+-- Generation Time: Oct 11, 2024 at 02:51 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -90,7 +90,7 @@ CREATE TABLE `jadwal_tayang` (
 INSERT INTO `jadwal_tayang` (`id`, `idCinema`, `idFilm`, `tanggal`, `jamTayang`, `jumlahKursi`, `kursiTerjual`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 1, '2024-10-03', '15:30:00', 100, 0, '2024-10-03 08:01:02', '2024-10-03 08:04:05'),
 (2, 3, 2, '2024-10-03', '15:30:00', 100, 0, '2024-10-03 08:03:10', '2024-10-03 08:03:46'),
-(3, 3, 1, '2024-10-03', '19:00:00', 100, 0, '2024-10-03 08:03:31', NULL);
+(3, 3, 1, '2024-10-03', '19:00:00', 100, 1, '2024-10-03 08:03:31', '2024-10-10 08:12:52');
 
 -- --------------------------------------------------------
 
@@ -128,9 +128,17 @@ CREATE TABLE `orders` (
   `idJadwal` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `no_kursi` int(11) NOT NULL,
+  `harga` double NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `idUser`, `idJadwal`, `jumlah`, `no_kursi`, `harga`, `createdAt`, `updatedAt`) VALUES
+(3, 1, 3, 1, 10, 40000, '2024-10-10 08:12:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -229,7 +237,7 @@ ALTER TABLE `keys`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
