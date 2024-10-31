@@ -97,7 +97,17 @@ class Order extends RestController
 	{
 		$id = $this->put('id');
 
-		$orders        = $this->orders->getOneOrders(['orders.id' => $id]);
+		$orders = $this->orders->getOneOrders(['orders.id' => $id]);
+
+		if (!$orders) {
+			$this->response([
+				'status'  => false,
+				'message' => 'Order tidak ditemukan'
+			], 400);
+
+			exit;
+		}
+
 		$jadwal_tayang = $this->jadwal->getOneJadwal($orders->idJadwal);
 
 		$jumlah   = $this->put('jumlah');
@@ -163,4 +173,4 @@ class Order extends RestController
 	}
 }
 
-  /* End of file Order.php */
+    /* End of file Order.php */
