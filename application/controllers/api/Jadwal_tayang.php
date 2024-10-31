@@ -22,17 +22,17 @@ class Jadwal_tayang extends RestController
 
 		foreach ($jadwal as $jdw) {
 			array_push($newJadwal, [
-				'id' => (int) $jdw->id,
-				'idCinema' => (int) $jdw->idCinema,
-				'idFilm' => (int) $jdw->idFilm,
-				'tanggal' => $jdw->tanggal,
-				'jamTayang' => $jdw->jamTayang,
-				'jumlahKursi' => (int) $jdw->jumlahKursi,
+				'id'           => (int) $jdw->id,
+				'idCinema'     => (int) $jdw->idCinema,
+				'idFilm'       => (int) $jdw->idFilm,
+				'tanggal'      => $jdw->tanggal,
+				'jamTayang'    => $jdw->jamTayang,
+				'jumlahKursi'  => (int) $jdw->jumlahKursi,
 				'kursiTerjual' => (int) $jdw->kursiTerjual,
-				'namaCinema' => $jdw->namaCinema,
-				'judul' => $jdw->judul,
-				'genre' => $jdw->genre,
-				'durasi' => (int) $jdw->durasi
+				'namaCinema'   => $jdw->namaCinema,
+				'judul'        => $jdw->judul,
+				'genre'        => $jdw->genre,
+				'durasi'       => (int) $jdw->durasi
 			]);
 		}
 
