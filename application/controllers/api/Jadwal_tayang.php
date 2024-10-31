@@ -37,10 +37,10 @@ class Jadwal_tayang extends RestController
 		}
 
 		$this->response([
-			'status'  => true,
+			'status'  => (count($jadwal) > 0) ? true : false,
 			'message' => (count($jadwal) > 0) ?  'Jadwal tayang ditemukan' : 'Jadwal tayang tidak ditemukan',
-			'data'    => $newJadwal
-		], 200);
+			'data'    => $jadwal
+		], (count($jadwal) > 0) ? 200 : 404);
 	}
 
 	public function detail_get()
