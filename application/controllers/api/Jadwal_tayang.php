@@ -34,6 +34,7 @@ class Jadwal_tayang extends RestController
 					'judul'        => $jdw->judul,
 					'genre'        => $jdw->genre,
 					'durasi'       => (int) $jdw->durasi,
+					'sinopsis'     => $jdw->sinopsis,
 					'gambar'       => ($jdw->gambar != NULL) ? base_url('upload/gambar/' . $jdw->gambar) : NULL
 				]);
 			}
@@ -65,6 +66,7 @@ class Jadwal_tayang extends RestController
 				'judul'        => $jadwal->judul,
 				'genre'        => $jadwal->genre,
 				'durasi'       => (int) $jadwal->durasi,
+				'sinopsis'     => $jadwal->sinopsis,
 				'gambar'       => ($jadwal->gambar != NULL) ? base_url('upload/gambar/' . $jadwal->gambar) : NULL
 			];
 

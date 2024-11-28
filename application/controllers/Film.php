@@ -46,13 +46,15 @@ class Film extends CI_Controller
 			'required' => 'Genre Film tidak boleh kosong!'
 		]);
 		$this->form_validation->set_rules('durasi', 'Durasi Film', 'required|numeric');
+		$this->form_validation->set_rules('sinopsis', 'Sinopsis', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->add();
 		} else {
-			$judul  = $this->input->post('judul');
-			$genre  = $this->input->post('genre');
-			$durasi = $this->input->post('durasi');
+			$judul    = $this->input->post('judul');
+			$genre    = $this->input->post('genre');
+			$durasi   = $this->input->post('durasi');
+			$sinopsis = $this->input->post('sinopsis');
 
 			$upload_gambar = $_FILES['gambar']['name'];
 
@@ -76,17 +78,19 @@ class Film extends CI_Controller
 					$upload_data = $this->upload->data();
 
 					$data = [
-						'judul'  => $judul,
-						'genre'  => $genre,
-						'durasi' => $durasi,
-						'gambar' => $upload_data['file_name']
+						'judul'    => $judul,
+						'genre'    => $genre,
+						'durasi'   => $durasi,
+						'sinopsis' => $sinopsis,
+						'gambar'   => $upload_data['file_name']
 					];
 				}
 			} else {
 				$data = [
-					'judul'  => $judul,
-					'genre'  => $genre,
-					'durasi' => $durasi
+					'judul'    => $judul,
+					'genre'    => $genre,
+					'durasi'   => $durasi,
+					'sinopsis' => $sinopsis,
 				];
 			}
 
@@ -128,14 +132,15 @@ class Film extends CI_Controller
 			'required' => 'Genre Film tidak boleh kosong!'
 		]);
 		$this->form_validation->set_rules('durasi', 'Durasi Film', 'required|numeric');
-
+		$this->form_validation->set_rules('sinopsis', 'Sinopsis', 'required');
 
 		if ($this->form_validation->run() == false) {
 			$this->edit($id);
 		} else {
-			$judul  = $this->input->post('judul');
-			$genre  = $this->input->post('genre');
-			$durasi = $this->input->post('durasi');
+			$judul    = $this->input->post('judul');
+			$genre    = $this->input->post('genre');
+			$durasi   = $this->input->post('durasi');
+			$sinopsis = $this->input->post('sinopsis');
 
 			$upload_gambar = $_FILES['gambar']['name'];
 
@@ -159,17 +164,19 @@ class Film extends CI_Controller
 					$upload_data = $this->upload->data();
 
 					$data = [
-						'judul'  => $judul,
-						'genre'  => $genre,
-						'durasi' => $durasi,
-						'gambar' => $upload_data['file_name']
+						'judul'    => $judul,
+						'genre'    => $genre,
+						'durasi'   => $durasi,
+						'sinopsis' => $sinopsis,
+						'gambar'   => $upload_data['file_name']
 					];
 				}
 			} else {
 				$data = [
-					'judul'  => $judul,
-					'genre'  => $genre,
-					'durasi' => $durasi
+					'judul'    => $judul,
+					'genre'    => $genre,
+					'durasi'   => $durasi,
+					'sinopsis' => $sinopsis,
 				];
 			}
 
@@ -209,4 +216,4 @@ class Film extends CI_Controller
 	}
 }
 
-      /* End of file Film.php */
+        /* End of file Film.php */

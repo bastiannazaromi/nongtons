@@ -44,6 +44,11 @@
 									<span class="text-danger"><?php echo form_error('durasi'); ?></span>
 								</div>
 								<div class="form-group">
+									<label>Sinopsis</label>
+									<textarea name="sinopsis" class="form-control" rows="7"><?php echo set_value('sinopsis'); ?></textarea>
+									<span class="text-danger"><?php echo form_error('sinopsis'); ?></span>
+								</div>
+								<div class="form-group">
 									<label>Gambar</label>
 									<input type="file" name="gambar" class="form-control" accept=".png,.jpg,.jpeg">
 								</div>

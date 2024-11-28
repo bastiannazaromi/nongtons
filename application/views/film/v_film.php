@@ -53,6 +53,7 @@
 											<th>Judul Film</th>
 											<th>Genre</th>
 											<th>Durasi</th>
+											<th>Sinopsis</th>
 											<th>Gambar</th>
 											<th>Action</th>
 										</tr>
@@ -64,6 +65,7 @@
 												<td><?php echo $fil->judul; ?></td>
 												<td><?php echo $fil->genre; ?></td>
 												<td><?php echo $fil->durasi . ' Menit'; ?></td>
+												<td><?php echo nl2br(htmlspecialchars($fil->sinopsis)); ?></td>
 												<td class="text-center">
 													<?php if ($fil->gambar != NULL) : ?>
 														<a href="<?= base_url('upload/gambar/' . $fil->gambar); ?>" target="gambar">
