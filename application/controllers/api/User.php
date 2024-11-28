@@ -59,17 +59,28 @@ class User extends RestController
 		if ($data) {
 			if (password_verify($password, $data->password)) {
 				$msg = 'Login berhasil';
+
+				$this->response([
+					'status'  => true,
+					'message' => $msg,
+					'data'    => $data
+				], 200);
 			} else {
 				$msg = 'Username atau password salah';
+
+				$this->response([
+					'status'  => false,
+					'message' => $msg
+				], 200);
 			}
 		} else {
 			$msg = 'Username atau password salah';
-		}
 
-		$this->response([
-			'status'  => true,
-			'message' => $msg
-		], 200);
+			$this->response([
+				'status'  => false,
+				'message' => $msg
+			], 200);
+		}
 	}
 }
 

@@ -20,28 +20,30 @@ class Jadwal_tayang extends RestController
 
 		$newJadwal = [];
 
-		foreach ($jadwal as $jdw) {
-			array_push($newJadwal, [
-				'id'           => (int) $jdw->id,
-				'idCinema'     => (int) $jdw->idCinema,
-				'idFilm'       => (int) $jdw->idFilm,
-				'tanggal'      => $jdw->tanggal,
-				'jamTayang'    => $jdw->jamTayang,
-				'jumlahKursi'  => (int) $jdw->jumlahKursi,
-				'kursiTerjual' => (int) $jdw->kursiTerjual,
-				'namaCinema'   => $jdw->namaCinema,
-				'judul'        => $jdw->judul,
-				'genre'        => $jdw->genre,
-				'durasi'       => (int) $jdw->durasi,
-				'gambar'       => ($jdw->gambar != NULL) ? base_url('upload/gambar/' . $jdw->gambar) : NULL
-			]);
+		if (count($jadwal) > 0) {
+			foreach ($jadwal as $jdw) {
+				array_push($newJadwal, [
+					'id'           => (int) $jdw->id,
+					'idCinema'     => (int) $jdw->idCinema,
+					'idFilm'       => (int) $jdw->idFilm,
+					'tanggal'      => $jdw->tanggal,
+					'jamTayang'    => $jdw->jamTayang,
+					'jumlahKursi'  => (int) $jdw->jumlahKursi,
+					'kursiTerjual' => (int) $jdw->kursiTerjual,
+					'namaCinema'   => $jdw->namaCinema,
+					'judul'        => $jdw->judul,
+					'genre'        => $jdw->genre,
+					'durasi'       => (int) $jdw->durasi,
+					'gambar'       => ($jdw->gambar != NULL) ? base_url('upload/gambar/' . $jdw->gambar) : NULL
+				]);
+			}
 		}
 
 		$this->response([
 			'status'  => (count($jadwal) > 0) ? true : false,
 			'message' => (count($jadwal) > 0) ?  'Jadwal tayang ditemukan' : 'Jadwal tayang tidak ditemukan',
 			'data'    => $newJadwal
-		], (count($jadwal) > 0) ? 200 : 404);
+		], 200);
 	}
 
 	public function detail_get()
