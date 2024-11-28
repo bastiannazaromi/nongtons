@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2024 at 03:02 AM
+-- Generation Time: Nov 28, 2024 at 08:25 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -53,6 +53,7 @@ CREATE TABLE `film` (
   `judul` varchar(50) NOT NULL,
   `genre` varchar(25) NOT NULL,
   `durasi` int(11) NOT NULL,
+  `sinopsis` text NOT NULL,
   `gambar` text DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
@@ -62,9 +63,9 @@ CREATE TABLE `film` (
 -- Dumping data for table `film`
 --
 
-INSERT INTO `film` (`id`, `judul`, `genre`, `durasi`, `gambar`, `createdAt`, `updatedAt`) VALUES
-(1, 'Kungfu Panda', 'Action', 120, '994b542797c2a0481b8b3e1d1173d0fd.jpg', '2024-10-03 08:00:23', '2024-11-28 01:56:08'),
-(6, 'The Last: Naruto the Movie', 'Action', 120, '7f507420fdc20075201b35923062cc9c.jpg', '2024-11-28 01:49:10', NULL);
+INSERT INTO `film` (`id`, `judul`, `genre`, `durasi`, `sinopsis`, `gambar`, `createdAt`, `updatedAt`) VALUES
+(1, 'Kung Fu Panda 4', 'Action', 120, 'Po, sang Pendekar Naga telah melalui tiga petualangan menantang maut. Dia mampu mengalahkan penjahat kelas dunia dengan keberaniannya dan juga kemampuan bela diri yang luar biasa.\r\nHingga akhirnya, Pendekar Naga tersebut ditakdirkan untuk pensiun dan menjadi Spiritual Leader di Lembah Perdamaian. Hal tersebut tentu saja menimbulkan berbagai masalah yang berat baginya.\r\nMasalah pertama yakni, Po harus menguasai banyak hal terkait kepemimpinannya sebagai Spiritual Leader. Selain Itu, dia juga harus segera menemukan seorang Dragon Warrior untuk menggantikan posisinya sebagai Pendekar Naga.\r\nMasalah semakin rumit saat penyihir jahat yang dapat berubah wujud muncul. Sosok bernama The Chameleon tersebut sangat serakah dan mempunyai kekuatan untuk memanggil kembali semua penjahat yang telah dikalahkan Po.\r\nOleh karena itu, Po membutuhkan bantuan untuk mengatasi berbagai masalah tersebut. Dalam prosesnya, Po akhirnya berhasil menemukan pahlawan di berbagai tempat yang tak terduga untuk membantunya.', '994b542797c2a0481b8b3e1d1173d0fd.jpg', '2024-10-03 08:00:23', '2024-11-28 05:38:09'),
+(6, 'The Last: Naruto the Movie', 'Action', 120, 'Dua tahun setelah peristiwa Perang Besar Shinobi Keempat, bulan Hagoromo Ōtsutsuki yang sudah lama dibuat untuk menyegel Jūbi mulai jatuh ke Bumi. Ancaman bulan yang akan menjadi meteor ini pun akan menghancurkan segala sesuatu yang akan berdampak buruk. Peristiwa ini disebabkan oleh Toneri Ōtsutsuki, keturunan terakhir dari saudara kembar Hagoromo Ōtsutsuki/Rikudou Sennin, yaitu Hamura Ōtsutsuki yang di mana salah satu dari keluarganya tersegel di bulan sejak pembentukannya. Di tengah suasana yang sepi di rumah klan Hyuga, Toneri mencoba untuk menculik adik Hinata Hyuuga, yaitu Hanabi. Naruto dan teman-temannya harus segera menyusun misi penyelamatan sebelum temuan mereka terlibat dalam pertempuran akhir untuk menentukan nasib dari segalanya.', '7f507420fdc20075201b35923062cc9c.jpg', '2024-11-28 01:49:10', '2024-11-28 05:36:05');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,6 @@ CREATE TABLE `jadwal_tayang` (
 
 INSERT INTO `jadwal_tayang` (`id`, `idCinema`, `idFilm`, `tanggal`, `jamTayang`, `jumlahKursi`, `kursiTerjual`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 1, '2024-10-03', '15:30:00', 100, 0, '2024-10-03 08:01:02', '2024-10-03 08:04:05'),
-(2, 3, 2, '2024-10-03', '15:30:00', 100, 7, '2024-10-03 08:03:10', '2024-10-31 04:11:52'),
 (3, 3, 1, '2024-10-03', '19:00:00', 100, 0, '2024-10-03 08:03:31', '2024-10-24 04:24:13'),
 (4, 1, 6, '2024-11-28', '15:00:00', 73, 0, '2024-11-28 02:00:55', NULL);
 
@@ -134,13 +134,6 @@ CREATE TABLE `orders` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `idUser`, `idJadwal`, `jumlah`, `no_kursi`, `harga`, `createdAt`, `updatedAt`) VALUES
-(7, 1, 2, 7, 10, 280000, '2024-10-31 04:11:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -223,7 +216,7 @@ ALTER TABLE `cinema`
 -- AUTO_INCREMENT for table `film`
 --
 ALTER TABLE `film`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jadwal_tayang`
