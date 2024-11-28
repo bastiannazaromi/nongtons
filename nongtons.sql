@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 11, 2024 at 02:51 AM
+-- Generation Time: Nov 28, 2024 at 03:02 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -53,6 +53,7 @@ CREATE TABLE `film` (
   `judul` varchar(50) NOT NULL,
   `genre` varchar(25) NOT NULL,
   `durasi` int(11) NOT NULL,
+  `gambar` text DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -61,9 +62,9 @@ CREATE TABLE `film` (
 -- Dumping data for table `film`
 --
 
-INSERT INTO `film` (`id`, `judul`, `genre`, `durasi`, `createdAt`, `updatedAt`) VALUES
-(1, 'Kungfu Panda', 'Action', 120, '2024-10-03 08:00:23', NULL),
-(2, 'The Simpsone', 'Comedy', 140, '2024-10-03 08:00:23', NULL);
+INSERT INTO `film` (`id`, `judul`, `genre`, `durasi`, `gambar`, `createdAt`, `updatedAt`) VALUES
+(1, 'Kungfu Panda', 'Action', 120, '994b542797c2a0481b8b3e1d1173d0fd.jpg', '2024-10-03 08:00:23', '2024-11-28 01:56:08'),
+(6, 'The Last: Naruto the Movie', 'Action', 120, '7f507420fdc20075201b35923062cc9c.jpg', '2024-11-28 01:49:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,8 +90,9 @@ CREATE TABLE `jadwal_tayang` (
 
 INSERT INTO `jadwal_tayang` (`id`, `idCinema`, `idFilm`, `tanggal`, `jamTayang`, `jumlahKursi`, `kursiTerjual`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 1, '2024-10-03', '15:30:00', 100, 0, '2024-10-03 08:01:02', '2024-10-03 08:04:05'),
-(2, 3, 2, '2024-10-03', '15:30:00', 100, 0, '2024-10-03 08:03:10', '2024-10-03 08:03:46'),
-(3, 3, 1, '2024-10-03', '19:00:00', 100, 1, '2024-10-03 08:03:31', '2024-10-10 08:12:52');
+(2, 3, 2, '2024-10-03', '15:30:00', 100, 7, '2024-10-03 08:03:10', '2024-10-31 04:11:52'),
+(3, 3, 1, '2024-10-03', '19:00:00', 100, 0, '2024-10-03 08:03:31', '2024-10-24 04:24:13'),
+(4, 1, 6, '2024-11-28', '15:00:00', 73, 0, '2024-11-28 02:00:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `idUser`, `idJadwal`, `jumlah`, `no_kursi`, `harga`, `createdAt`, `updatedAt`) VALUES
-(3, 1, 3, 1, 10, 40000, '2024-10-10 08:12:52', NULL);
+(7, 1, 2, 7, 10, 280000, '2024-10-31 04:11:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -154,6 +156,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `tahun` int(11) NOT NULL,
   `no_hp` varchar(14) NOT NULL,
+  `role` int(1) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -162,8 +165,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `email`, `username`, `password`, `tahun`, `no_hp`, `createdAt`, `updatedAt`) VALUES
-(1, 'Admin', 'admin@gmail.com', 'admin', '$2y$10$.pUHewzPqCdcnaOt5sUNf.FU6CTsEo.Rjki7jVeU7Bwb/cu74sN5K', 2024, '', '2024-03-13 07:13:19', '2024-04-19 01:34:44');
+INSERT INTO `user` (`id`, `nama`, `email`, `username`, `password`, `tahun`, `no_hp`, `role`, `createdAt`, `updatedAt`) VALUES
+(1, 'Admin', 'admin@gmail.com', 'admin', '$2y$10$.pUHewzPqCdcnaOt5sUNf.FU6CTsEo.Rjki7jVeU7Bwb/cu74sN5K', 2024, '', 1, '2024-03-13 07:13:19', '2024-11-28 01:14:11'),
+(2, 'Dalban', 'dalban@gmail.com', 'dalban.1', '$2y$10$.pUHewzPqCdcnaOt5sUNf.FU6CTsEo.Rjki7jVeU7Bwb/cu74sN5K', 2024, '', 2, '2024-11-28 07:13:19', NULL);
 
 --
 -- Indexes for dumped tables
@@ -213,19 +217,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cinema`
 --
 ALTER TABLE `cinema`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `film`
 --
 ALTER TABLE `film`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jadwal_tayang`
 --
 ALTER TABLE `jadwal_tayang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `keys`
@@ -237,7 +241,7 @@ ALTER TABLE `keys`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

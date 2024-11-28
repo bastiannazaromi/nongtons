@@ -11,7 +11,7 @@ class M_Jadwal extends CI_Model
 
 	public function getAllJadwal()
 	{
-		$this->db->select('jadwal_tayang.*, cinema.namaCinema, film.judul, film.genre, film.durasi');
+		$this->db->select('jadwal_tayang.*, cinema.namaCinema, film.judul, film.genre, film.durasi, film.gambar');
 		$this->db->join('cinema', 'cinema.id = jadwal_tayang.idCinema', 'inner');
 		$this->db->join('film', 'film.id = jadwal_tayang.idFilm', 'inner');
 
@@ -22,7 +22,7 @@ class M_Jadwal extends CI_Model
 
 	public function getOneJadwal($id)
 	{
-		$this->db->select('jadwal_tayang.*, cinema.namaCinema, film.judul, film.genre, film.durasi');
+		$this->db->select('jadwal_tayang.*, cinema.namaCinema, film.judul, film.genre, film.durasi, film.gambar');
 		$this->db->join('cinema', 'cinema.id = jadwal_tayang.idCinema', 'inner');
 		$this->db->join('film', 'film.id = jadwal_tayang.idFilm', 'inner');
 

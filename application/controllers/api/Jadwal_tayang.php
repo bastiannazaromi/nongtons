@@ -32,14 +32,15 @@ class Jadwal_tayang extends RestController
 				'namaCinema'   => $jdw->namaCinema,
 				'judul'        => $jdw->judul,
 				'genre'        => $jdw->genre,
-				'durasi'       => (int) $jdw->durasi
+				'durasi'       => (int) $jdw->durasi,
+				'gambar'       => ($jdw->gambar != NULL) ? base_url('upload/gambar/' . $jdw->gambar) : NULL
 			]);
 		}
 
 		$this->response([
 			'status'  => (count($jadwal) > 0) ? true : false,
 			'message' => (count($jadwal) > 0) ?  'Jadwal tayang ditemukan' : 'Jadwal tayang tidak ditemukan',
-			'data'    => $jadwal
+			'data'    => $newJadwal
 		], (count($jadwal) > 0) ? 200 : 404);
 	}
 
@@ -50,6 +51,21 @@ class Jadwal_tayang extends RestController
 		$jadwal = $this->jadwal->getOneJadwal($id);
 
 		if ($jadwal) {
+			$jadwal = [
+				'id'           => (int) $jadwal->id,
+				'idCinema'     => (int) $jadwal->idCinema,
+				'idFilm'       => (int) $jadwal->idFilm,
+				'tanggal'      => $jadwal->tanggal,
+				'jamTayang'    => $jadwal->jamTayang,
+				'jumlahKursi'  => (int) $jadwal->jumlahKursi,
+				'kursiTerjual' => (int) $jadwal->kursiTerjual,
+				'namaCinema'   => $jadwal->namaCinema,
+				'judul'        => $jadwal->judul,
+				'genre'        => $jadwal->genre,
+				'durasi'       => (int) $jadwal->durasi,
+				'gambar'       => ($jadwal->gambar != NULL) ? base_url('upload/gambar/' . $jadwal->gambar) : NULL
+			];
+
 			$this->response([
 				'status'  => true,
 				'message' => 'Jadwal tayang ditemukan',

@@ -36,6 +36,41 @@ class User extends RestController
 			'data'    => $newUser
 		], 200);
 	}
+
+	public function login_post()
+	{
+		$username = $this->post('username');
+		$password = $this->post('password');
+
+		if (!$username || !$password) {
+			$this->response([
+				'status'  => false,
+				'message' => 'Username dan password wajib diisi'
+			], 400);
+
+			exit;
+		}
+
+		$this->db->where('username', $username);
+		$this->db->where('role', 2);
+
+		$data = $this->db->get('user')->row();
+
+		if ($data) {
+			if (password_verify($password, $data->password)) {
+				$msg = 'Login berhasil';
+			} else {
+				$msg = 'Username atau password salah';
+			}
+		} else {
+			$msg = 'Username atau password salah';
+		}
+
+		$this->response([
+			'status'  => true,
+			'message' => $msg
+		], 200);
+	}
 }
 
 /* End of file User.php */

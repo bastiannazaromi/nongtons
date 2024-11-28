@@ -104,7 +104,7 @@ class Cinema extends CI_Controller
 
 				redirect('cinema', 'refresh');
 			} else {
-				$this->session->set_flashdata('error', 'Data gagak diedit');
+				$this->session->set_flashdata('error', 'Data gagal diedit');
 
 				redirect('cinema', 'refresh');
 			}

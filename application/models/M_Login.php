@@ -7,6 +7,8 @@ class M_Login extends CI_Model
 	public function cekLogin($username, $password)
 	{
 		$this->db->where('username', $username);
+		$this->db->where('role', 1);
+
 		$data = $this->db->get('user')->row();
 
 		if ($data) {
