@@ -62,6 +62,7 @@ class User extends CI_Controller
 			'max_length' => 'Tahun tidak boleh lebih dari 4 karakter',
 			'numeric'    => 'Tahun harus diisi dengan angka'
 		]);
+		$this->form_validation->set_rules('role', 'Role', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$data = [
@@ -75,13 +76,15 @@ class User extends CI_Controller
 			$nama     = $this->input->post('nama');
 			$email    = $this->input->post('email');
 			$tahun    = $this->input->post('tahun');
+			$role     = $this->input->post('role');
 
 			$data = [
 				'username' => $username,
 				'password' => password_hash('12345678', PASSWORD_BCRYPT),
 				'nama'     => $nama,
 				'email'    => $email,
-				'tahun'    => $tahun
+				'tahun'    => $tahun,
+				'role'     => $role
 			];
 
 			$insert = $this->user->addUser($data);
@@ -128,6 +131,7 @@ class User extends CI_Controller
 			'required' => 'Tahun harus diisi!',
 			'numeric'  => 'Tahun hanya bisa diisi dengan angka'
 		]);
+		$this->form_validation->set_rules('role', 'Role', 'required');
 
 		if ($this->form_validation->run() == false) {
 			$user = $this->user->getOneUser($id);
@@ -144,12 +148,14 @@ class User extends CI_Controller
 			$nama     = $this->input->post('nama');
 			$email    = $this->input->post('email');
 			$tahun    = $this->input->post('tahun');
+			$role     = $this->input->post('role');
 
 			$data = [
 				'username' => $username,
 				'nama'     => $nama,
 				'email'    => $email,
-				'tahun'    => $tahun
+				'tahun'    => $tahun,
+				'role'     => $role
 			];
 
 			$update = $this->user->editUser($id, $data);

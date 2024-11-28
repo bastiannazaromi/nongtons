@@ -102,8 +102,6 @@ class Film extends CI_Controller
 				$this->session->set_flashdata('error', 'Data gagal disimpan!');
 			}
 
-			die;
-
 			redirect('film', 'refresh');
 		}
 	}
@@ -204,9 +202,16 @@ class Film extends CI_Controller
 
 	public function delete($id)
 	{
+		$film = $this->film->getOneFilm($id);
 		$delete = $this->film->delete($id);
 
 		if ($delete) {
+			$path = FCPATH . 'upload/gambar/';
+
+			if ($film->gambar != NULL) {
+				unlink($path . $film->gambar);
+			}
+
 			$this->session->set_flashdata('sukses', 'Data berhasil dihapus');
 		} else {
 			$this->session->set_flashdata('error', 'Data gagal dihapus');

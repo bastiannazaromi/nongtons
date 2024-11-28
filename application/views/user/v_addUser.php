@@ -48,6 +48,14 @@
 									<input type="number" name="tahun" class="form-control" value="<?php echo set_value('tahun'); ?>">
 									<span class="text-danger"><?php echo form_error('tahun'); ?></span>
 								</div>
+								<div class="form-group">
+									<label>Role</label>
+									<select name="role" class="form-control">
+										<option value="1" <?= (set_value('role') == 1) ? 'selected' : ''; ?>>Admin</option>
+										<option value="2" <?= (set_value('role') == 2) ? 'selected' : ''; ?>>User</option>
+									</select>
+									<span class="text-danger"><?php echo form_error('tahun'); ?></span>
+								</div>
 								<button type="submit" class="btn btn-success">Simpan</button>
 							</form>
 						</div>

@@ -49,6 +49,14 @@
 									<input type="text" name="tahun" class="form-control" value="<?php echo $user->tahun; ?>">
 									<span class="text-danger"><?php echo form_error('tahun'); ?></span>
 								</div>
+								<div class="form-group">
+									<label>Role</label>
+									<select name="role" class="form-control">
+										<option value="1" <?= ($user->role == 1) ? 'selected' : ''; ?>>Admin</option>
+										<option value="2" <?= ($user->role == 2) ? 'selected' : ''; ?>>User</option>
+									</select>
+									<span class="text-danger"><?php echo form_error('tahun'); ?></span>
+								</div>
 								<button type="submit" class="btn btn-success">Simpan</button>
 							</form>
 						</div>
