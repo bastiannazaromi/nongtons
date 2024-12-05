@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Orders extends CI_Model
 {
-	public function getAllOrders($where)
+	public function getAllOrders($where = null)
 	{
 		$this->db->select('orders.*, user.nama, jadwal_tayang.tanggal, jadwal_tayang.jamTayang, film.judul, cinema.namaCinema');
 
